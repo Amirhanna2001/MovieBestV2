@@ -1,0 +1,63 @@
+﻿@model ManageUserViewModel
+@{
+    ViewData["Title"] = "Manage User";
+}
+<h1>Manage User : @Model.UserName</h1>
+<hr />
+ <form asp-action="ManageUser" method="post">
+
+    <input type="hidden" asp-for="@Model.UserId" />
+    <div class="form-group">
+        
+        <label asp-for="FirstName"></label>
+        <input asp-for="FirstName" class="form-control" maxlength="100"/>
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName" class="form-control" maxlength="100" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="UserName"></label>
+        <input asp-for="UserName" class="form-control" maxlength="100" />
+        <span asp-validation-for="UserName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+            
+    <hr />
+    <h5>Roles : </h5>
+        @for (int i = 0; i < Model.UserRoles.Count; ++i)
+        {
+            <div class="form-check m-1">
+                <input type="hidden" asp-for="@Model.UserRoles[i].DisplayName">
+                <input class="form-check-input" asp-for="@Model.UserRoles[i].IsChecked">
+                <label class="form-check-label" asp-for="@Model.UserRoles[i].IsChecked">@Model.UserRoles[i].DisplayName</label>
+            </div>
+        }
+        <span asp-validation-for="UserRoles" class="text-danger"></span>
+        <br />
+        <div >
+            <button type="submit" class="btn btn-primary">Save</button>
+
+            <a onclick="return confirm('Are You Sure You Want to Delete This User ?' )"
+                class="btn btn-danger" 
+                asp-action="Delete" asp-route-id="@Model.UserId">
+                <i class="bi bi-trash"></i>
+                Delete
+            </a>
+            <a class="btn btn-secondary" asp-action="Index">Cancel</a>
+        </div>
+    
+    
+</form>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+}

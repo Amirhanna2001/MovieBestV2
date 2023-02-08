@@ -1,0 +1,59 @@
+﻿@model AddUserViewModel
+@{
+    ViewData["Title"] = "Add New User";
+}
+
+<h1>Add New User</h1>
+<hr />
+ <form asp-action="AddNewUser" method="post">
+
+
+            <div class="form-group">
+                <label asp-for="FirstName"></label>
+                <input asp-for="FirstName" class="form-control" maxlength="100"/>
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName"></label>
+                <input asp-for="LastName" class="form-control" maxlength="100" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserName"></label>
+                <input asp-for="UserName" class="form-control" maxlength="100" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmPassword"></label>
+                <input asp-for="ConfirmPassword" class="form-control" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+            <hr />
+            <h5>Roles : </h5>
+             @for (int i = 0; i < Model.Roles.Count; ++i)
+                {
+                    <div class="form-check m-1">
+                        <input type="hidden" asp-for="@Model.Roles[i].DisplayName">
+                        <input class="form-check-input" asp-for="@Model.Roles[i].IsChecked">
+                        <label class="form-check-label" asp-for="@Model.Roles[i].IsChecked">@Model.Roles[i].DisplayName</label>
+                    </div>
+                }
+                <span asp-validation-for="Roles" class="text-danger"></span>
+                <br />
+
+            <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

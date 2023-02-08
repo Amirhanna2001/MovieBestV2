@@ -1,0 +1,18 @@
+﻿@model GenreViewModel
+@{
+    ViewData["title"] = "Add New Genre";
+}
+<h1>Add New Genre</h1>
+<hr />
+
+<form method="post">
+    <div class="form-group">
+                <label  asp-for="Name"></label>
+                <input asp-for="Name" maxlength="250"  type="text" class="form-control"/>
+                <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-primary" asp-action="Add">
+                    <i class="bi bi-check2"></i> Submit</button>
+    </div>
+</form>

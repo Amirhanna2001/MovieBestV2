@@ -1,0 +1,40 @@
+﻿@model List<Genre> 
+
+@{
+    ViewData["Title"] = "All Genres";
+}
+<a class="btn btn-secondary" asp-action="Add"><i class="bi bi-plus-circle"></i> Add New Genre</a>
+@if(Model.Any()){
+    <h1>All Genres</h1>
+    <hr />
+   <table class="table table-striped justify-content-between" >
+    <thead class="table-dark">
+        <tr>
+            <th>Genre Name</th>
+            <th>Actions</th>
+        </tr>
+     @*   <tr>
+            <th>Actions</th>  
+        </tr>*@
+
+    </thead>
+    <tbody>
+        @foreach(Genre genre in Model)
+        {
+            <tr>
+                <td>@genre.Name</td>
+                <td>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-Id="@genre.Id"
+                    onclick="return confirm('Are You Sure You Want to Delete @genre.Name Genre ?' )">
+                        <i class="bi bi-trash-fill"></i> Delete
+                    </a>
+                </td>
+            </tr>
+            
+        }
+    </tbody>
+</table>
+}
+else{
+    <h1>No Genres Yet</h1>
+}

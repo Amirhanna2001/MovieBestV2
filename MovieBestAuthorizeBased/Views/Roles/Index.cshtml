@@ -1,0 +1,23 @@
+﻿@model List<IdentityRole>
+@{
+    ViewData["title"] = "Roles";
+}
+<h1>System Roles</h1>
+<hr />
+<partial name="_RoleForm" model="new RoleViewModel()" />
+<table class="table table-striped justify-content-between" >
+    <thead class="table-dark">
+        <tr>
+            <th>Role Name</th>
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach(IdentityRole role in Model)
+        {
+            <tr>
+                <td>@role.Name</td>
+            </tr>
+        }
+    </tbody>
+</table>
